@@ -1,40 +1,25 @@
 /* eslint-disable react/jsx-key */
-import { Button } from "frames.js/next";
 import { frames } from "./frames";
-import { appURL } from "../utils";
+import { Button } from "frames.js/next";
 
-const frameHandler = frames(async (ctx) => {
-  const counter = ctx.message
-    ? ctx.searchParams.op === "+"
-      ? ctx.state.counter + 1
-      : ctx.state.counter - 1
-    : ctx.state.counter;
-
+const handler = frames(async () => {
   return {
-    image: (
-      <div tw="flex flex-col">
-        <div tw="flex">frames.js starter</div>
-        {ctx.message?.inputText && (
-          <div tw="flex">{`Input: ${ctx.message.inputText}`}</div>
-        )}
-        <div tw="flex">Counter {counter}</div>
-      </div>
-    ),
-    textInput: "Say something",
+    image: <div tw="flex">Welcome</div>,
     buttons: [
-      <Button action="post" target={{ pathname: "/", query: { op: "+" } }}>
-        Increment
+      // With query params
+      <Button
+        action="post"
+        target={{ pathname: "/mint-page", query: { foo: "bar" } }}
+      >
+        Begin Reading
       </Button>,
-      <Button action="post" target={{ pathname: "/", query: { op: "-" } }}>
-        Decrement
-      </Button>,
-      <Button action="link" target={appURL()}>
-        External
+      // Without query params
+      <Button action="link" target="https://www.nftarot.com">
+        Learn More
       </Button>,
     ],
-    state: { counter: counter },
   };
 });
 
-export const GET = frameHandler;
-export const POST = frameHandler;
+export const GET = handler;
+export const POST = handler;
