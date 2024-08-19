@@ -4,6 +4,11 @@ import { getTokenUrl } from "frames.js";
 import { zora } from "viem/chains";
 import { frames } from "../frames";
 
+//function to randomly select an a tarot card from supabase, need to grab reading and image as metadata
+//need the mint to correspond with the index of that card
+// so token id is based on the number selected from the database
+// need to use readingId in share
+
 const nfts: {
   src: string;
   tokenUrl: string;
